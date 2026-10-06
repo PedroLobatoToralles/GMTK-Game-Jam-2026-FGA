@@ -44,7 +44,7 @@ else if (estado == 2) {
         
 	        // Se as frases acabaram, transiciona para a tela final com o Chat Log
 	        if (text_index >= array_length(text_array)) {
-	             room_goto(room_ending); 
+	             room_goto(room_ending1); 
 	        }
 	    }
 	}
