@@ -1,4 +1,7 @@
 global.segundo=500;
+global.chat_messages = [];
+global.char_sprite_unlocked = false;
+global.team_count = 0;
 
 chat_x = 20;
 chat_y = 540;

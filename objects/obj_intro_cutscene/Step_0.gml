@@ -1,3 +1,13 @@
+var _key_pressed = (keyboard_check_pressed(vk_space) || keyboard_check_pressed(ord("Z")) || keyboard_check_pressed(vk_enter));
+
+// --- ATALHO: Pula Fade In (0) ou Espera (1) direto para a digitação de texto (2) ---
+if ((estado == 0 || estado == 1) && _key_pressed) {
+    alpha_imagem = 1;     // Garante que a ampulheta fique 100% visível
+    estado = 2;           // Vai direto para o estado de texto
+    pode_interagir = true;
+    io_clear();           // Limpa o teclado para não autocompletar a primeira frase sem querer
+}
+
 if (estado == 0) {
     // Fade in
     alpha_imagem += velocidade_fade;
@@ -24,36 +34,24 @@ else if (estado == 2) {
 
     if (char_index < _text_length) {
         char_index += char_speed;
-		if (floor(char_index) != floor(char_index - char_speed)) {
-			audio_play_sound(snd_text_beep, 1, false);
-	    }
+        if (floor(char_index) != floor(char_index - char_speed)) {
+            audio_play_sound(snd_text_beep, 1, false);
+        }
     }
-	
-	// --- LÓGICA DO TEMPO DE REFLEXÃO ---
     
-    // Se for a primeira frase E o timer ainda estiver rodando:
-    if (text_index == 0 && tempo_reflexao > 0) {
-        tempo_reflexao--;
-        pode_interagir = false; // Mantém bloqueado
-    } 
-    // Caso contrário (já passou os 3 segundos ou já está na segunda frase):
-    else {
-        pode_interagir = true;  // Libera a interação
-    }
-
-    // Só detecta o botão se ele puder interagir
-    var _key_pressed = (keyboard_check_pressed(vk_space) || keyboard_check_pressed(ord("Z")) || keyboard_check_pressed(vk_enter));
+    // Libera a interação imediatamente sem exigir o tempo de reflexão
+    pode_interagir = true;
 
     if (_key_pressed && pode_interagir) {
         if (char_index < _text_length) {
-            char_index = _text_length;
+            char_index = _text_length; // Se estiver digitando, completa a frase
         } 
         else {
-            text_index++;
+            text_index++;              // Se já completou, avança para a próxima frase
             char_index = 0;
             
             if (text_index >= array_length(text_array)) {
-                room_goto(room_game); 
+                room_goto(room_game);  // Chegou ao fim, vai pro jogo
             }
         }
     }

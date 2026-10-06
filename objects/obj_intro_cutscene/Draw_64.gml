@@ -33,6 +33,8 @@ if (estado == 2) {
         draw_text(_gui_w / 2, _text_y + 80, "[ SPACEBAR / Z ]");
     }
 
+    // --- RESET DOS ESTADOS DE DRAW ---
+    draw_set_color(c_white); // Reseta a cor global para branco!
     draw_set_halign(fa_left);
     draw_set_valign(fa_top);
 }

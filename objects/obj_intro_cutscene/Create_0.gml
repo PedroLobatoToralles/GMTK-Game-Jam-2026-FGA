@@ -1,3 +1,6 @@
+// Para a música do menu assim que a room_intro carrega
+audio_stop_sound(mus_game);
+
 text_array = [
     "What is time, anyway?",
     "We don't have time for this!",
@@ -16,3 +19,4 @@ tempo_espera = 60;
 
 tempo_reflexao = 180; // 180 frames = 3 segundos (rodando a 60 FPS)
 pode_interagir = false;
+

@@ -1,5 +1,18 @@
 var _ultimo_frame = sprite_get_number(animlogo) - 1; 
 
+// --- ATALHO: PULAR LOGOS DIRETO PARA A CAPA ("PRESS ANY KEY") ---
+if (estado < 9) {
+    if (keyboard_check_pressed(vk_space)) {
+        alpha_animacao = 0; // Esconde a animação inicial
+        alpha_gmtk = 0;     // Esconde a logo GMTK
+        alpha_capa = 1;     // Deixa a capa 100% visível
+        estado = 9;         // Pula direto para a capa + "Press any key"
+        
+        io_clear();         // Reseta o estado do teclado para o Estado 9 não ler o Espaço
+        exit;               // Sai do Step instantaneamente neste frame
+    }
+}
+
 // ---------------------------------------------------
 // LÓGICA DOS ESTADOS INICIAIS
 // ---------------------------------------------------
